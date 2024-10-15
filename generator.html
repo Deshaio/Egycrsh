@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد أرقام عشوائية</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>مولد الأرقام العشوائية</h1>
+        <p id="random-number">اضغط على الزر لتوليد رقم عشوائي</p>
+        <button onclick="generateRandomNumber()">توليد رقم</button>
+    </div>
+
+    <script>
+        let canClick = true;
+
+        function generateRandomNumber() {
+            if (canClick) {
+                canClick = false;
+                document.getElementById("random-number").textContent = "جارٍ التوليد...";
+
+                setTimeout(function() {
+                    var randomNumber = (Math.random() * 19 + 1).toFixed(2);
+                    document.getElementById("random-number").textContent = randomNumber + "×";
+                    canClick = true;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

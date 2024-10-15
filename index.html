@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول باستخدام مفتاح</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <h1>تسجيل الدخول</h1>
+        <p>أدخل المفتاح الخاص بك للوصول</p>
+        <input type="text" id="key-input" placeholder="أدخل المفتاح">
+        <button onclick="validateKey()">تسجيل الدخول</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // تكوين Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyD4VgqdnOqANz_6AKB8BHZyiEQm0SNO6bs",
+            authDomain: "crash-7f1fc.firebaseapp.com",
+            projectId: "crash-7f1fc",
+            storageBucket: "crash-7f1fc.appspot.com",
+            messagingSenderId: "69667083655",
+            appId: "1:69667083655:web:7153101150699885f46f22"
+        };
+
+        // التحقق من تحميل Firebase قبل التهيئة
+        let app, db;
+        if (!firebase.apps.length) {
+            app = firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore(app);
+        } else {
+            app = firebase.app(); // استخدام التطبيق الحالي إذا كان مهيأ
+            db = firebase.firestore(app);
+        }
+
+        // التحقق من المفتاح وصلاحية الوقت
+        function validateKey() {
+            const inputKey = document.getElementById("key-input").value;
+            const messageElement = document.getElementById("message");
+
+            if (!inputKey) {
+                messageElement.textContent = "من فضلك أدخل المفتاح.";
+                messageElement.style.color = "red";
+                return;
+            }
+
+            // البحث عن المفتاح في Firestore
+            db.collection("keys").doc(inputKey).get().then((doc) => {
+                if (doc.exists) {
+                    const expiryDate = doc.data().expiryDate.toDate(); // تحويل timestamp إلى تاريخ
+                    const currentDate = new Date(); // الحصول على التاريخ الحالي
+
+                    if (currentDate <= expiryDate) {
+                        // المفتاح صالح
+                        messageElement.textContent = "تم تسجيل الدخول بنجاح!";
+                        messageElement.style.color = "green";
+                        setTimeout(() => {
+                            window.location.href = "generator.html"; // توجيه المستخدم إلى صفحة المولد
+                        }, 1000);
+                    } else {
+                        // المفتاح منتهي الصلاحية
+                        messageElement.textContent = "المفتاح منتهي الصلاحية.";
+                        messageElement.style.color = "red";
+                    }
+                } else {
+                    // المفتاح غير موجود
+                    messageElement.textContent = "المفتاح غير صحيح، حاول مرة أخرى.";
+                    messageElement.style.color = "red";
+                }
+            }).catch((error) => {
+                console.error("خطأ في البحث عن المفتاح: ", error);
+                messageElement.textContent = "حدث خطأ في عملية تسجيل الدخول.";
+                messageElement.style.color = "red";
+            });
+        }
+    </script>
+</body>
+</html>
