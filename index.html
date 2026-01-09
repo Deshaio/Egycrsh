@@ -1,66 +1,77 @@
-<!DOCTYPE html>
-<html lang="ar">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول باستخدام مفتاح</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZANGR Smart Store</title>
+  <style>
+    body{
+      margin:0;font-family:'Cairo',sans-serif;background:#0f0f0f;color:#eee
+    }
+    header{
+      padding:40px 20px;text-align:center;background:linear-gradient(135deg,#0f0f0f,#1b1b1b)
+    }
+    header h1{color:#00ff99;font-size:2.2em}
+    header p{color:#bbb}
+    .cta{margin-top:20px;display:inline-block;padding:12px 25px;background:#00ff99;color:#000;border-radius:8px;text-decoration:none;font-weight:bold}section{padding:40px 20px;max-width:1100px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{
+  background:#161616;border-radius:14px;padding:20px;box-shadow:0 0 20px rgba(0,0,0,.6)
+}
+.card h3{color:#00ff99}
+.price{margin:15px 0;font-size:1.1em}
+.buy{
+  display:block;text-align:center;padding:10px;background:#00ff99;color:#000;border-radius:8px;text-decoration:none;font-weight:bold
+}
+footer{text-align:center;padding:30px;color:#777;font-size:14px}
+
+  </style>
 </head>
-<body>
-    <div class="login-container">
-        <h1>تسجيل الدخول</h1>
-        <p>أدخل المفتاح الخاص بك للوصول</p>
-        <input type="text" id="key-input" placeholder="أدخل المفتاح">
-        <button onclick="validateKey()">تسجيل الدخول</button>
-        <p id="message"></p>
-    </div>
+<body><header>
+  <h1>ZANGR Smart Store 😈💲</h1>
+  <p>كل خدمة رقمية محتاجها – جرّب الأول وفعّل براحتك</p>
+  <a class="cta" href="#services">ابدأ الآن 🔥</a>
+</header><section id="services">
+  <h2>🔥 الخدمات المتاحة</h2>
+  <div class="grid"><div class="card">
+  <h3>🎮 Boost حسابك</h3>
+  <p>نصائح + إعدادات احترافية ترفع مستواك بسرعة</p>
+  <div class="price">السعر: 20 جنيه</div>
+  <a class="buy" href="https://wa.me/201000000000?text=عايز%20خدمة%20Boost">فعّل الآن</a>
+</div>
 
-    <script>
-        // تكوين Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyD4VgqdnOqANz_6AKB8BHZyiEQm0SNO6bs",
-            authDomain: "crash-7f1fc.firebaseapp.com",
-            projectId: "crash-7f1fc",
-            storageBucket: "crash-7f1fc.appspot.com",
-            messagingSenderId: "69667083655",
-            appId: "1:69667083655:web:7153101150699885f46f22"
-        };
+<div class="card">
+  <h3>🎬 قائمة أفلام حسب مزاجك</h3>
+  <p>اختيارات مخصصة تدمرك نفسيًا 😈</p>
+  <div class="price">السعر: 15 جنيه</div>
+  <a class="buy" href="https://wa.me/201000000000?text=عايز%20قائمة%20افلام">فعّل الآن</a>
+</div>
 
-        // التحقق من تحميل Firebase قبل التهيئة
-        let app, db;
-        if (!firebase.apps.length) {
-            app = firebase.initializeApp(firebaseConfig);
-            db = firebase.firestore(app);
-        } else {
-            app = firebase.app(); // استخدام التطبيق الحالي إذا كان مهيأ
-            db = firebase.firestore(app);
-        }
+<div class="card">
+  <h3>🖼️ صور AI حصرية</h3>
+  <p>صور وخلفيات فخمة غير متاحة للجميع</p>
+  <div class="price">السعر: 10 جنيه</div>
+  <a class="buy" href="https://wa.me/201000000000?text=عايز%20صور%20AI">فعّل الآن</a>
+</div>
 
-        // التحقق من المفتاح وصلاحية الوقت
-        function validateKey() {
-            const inputKey = document.getElementById("key-input").value;
-            const messageElement = document.getElementById("message");
+<div class="card">
+  <h3>📈 توصية تداول قوية</h3>
+  <p>تحليل فني + نقطة دخول وخروج</p>
+  <div class="price">السعر: 20 جنيه</div>
+  <a class="buy" href="https://wa.me/201000000000?text=عايز%20توصية%20تداول">فعّل الآن</a>
+</div>
 
-            if (!inputKey) {
-                messageElement.textContent = "من فضلك أدخل المفتاح.";
-                messageElement.style.color = "red";
-                return;
-            }
+<div class="card">
+  <h3>🤖 نص → صوت عربي</h3>
+  <p>حوّل أي نص لصوت احترافي خلال دقائق</p>
+  <div class="price">السعر: 10 جنيه</div>
+  <a class="buy" href="https://wa.me/201000000000?text=عايز%20تحويل%20نص%20لصوت">فعّل الآن</a>
+</div>
 
-            // البحث عن المفتاح في Firestore
-            db.collection("keys").doc(inputKey).get().then((doc) => {
-                if (doc.exists) {
-                    const expiryDate = doc.data().expiryDate.toDate(); // تحويل timestamp إلى تاريخ
-                    const currentDate = new Date(); // الحصول على التاريخ الحالي
-
-                    if (currentDate <= expiryDate) {
-                        // المفتاح صالح
-                        messageElement.textContent = "تم تسجيل الدخول بنجاح!";
-                        messageElement.style.color = "green";
-                        setTimeout(() => {
+  </div>
+</section><footer>
+  ⚠️ كل الخدمات رقمية وتقديرية – لا نضمن أرباح استثمارية
+</footer></body>
+</html>                        setTimeout(() => {
                             window.location.href = "generator.html"; // توجيه المستخدم إلى صفحة المولد
                         }, 1000);
                     } else {
