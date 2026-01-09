@@ -31,6 +31,84 @@ footer{text-align:center;padding:30px;color:#777;font-size:14px}
   <p>كل خدمة رقمية محتاجها – جرّب الأول وفعّل براحتك</p>
   <a class="cta" href="#services">ابدأ الآن 🔥</a>
 </header><section id="services">
+  <section id="banner" style="padding:25px;text-align:center;border-radius:16px;box-shadow:0 0 35px rgba(0,255,153,0.5);background: linear-gradient(135deg,#0f0f0f,#1b1b1b);margin-bottom:35px;position:relative;overflow:hidden;">
+  <h2 id="banner-title" style="color:#00ff99;font-size:2.3em;font-weight:bold;animation: flash 1.5s infinite;"></h2>
+  <p id="banner-desc" style="color:#bbb;font-size:1.2em;margin:10px 0;"></p>
+  <p id="banner-profit" style="color:#ffcc00;font-weight:bold;font-size:1.2em;margin:5px 0;"></p>
+  <div style="margin-top:10px;">
+    <span id="countdown" style="color:#ff3300;font-weight:bold;font-size:1.4em;"></span>
+  </div>
+  <a id="banner-cta" href="#services" style="display:inline-block;padding:14px 28px;background:#00ff99;color:#000;border-radius:10px;font-weight:bold;text-decoration:none;margin-top:15px;transition: transform 0.3s, box-shadow 0.3s;">اشترِ الآن 🔥</a>
+</section>
+
+<style>
+@keyframes flash {
+  0%,100%{opacity:1;}
+  50%{opacity:0.6;}
+}
+@keyframes pulse {
+  0%{transform:scale(1); box-shadow:0 0 15px rgba(0,255,153,0.7);}
+  50%{transform:scale(1.05); box-shadow:0 0 25px rgba(0,255,153,1);}
+  100%{transform:scale(1); box-shadow:0 0 15px rgba(0,255,153,0.7);}
+}
+#banner-cta:hover {animation:pulse 1s infinite;}
+</style>
+
+<script>
+// العروض اليومية الأشرس
+const dailyOffers = [
+  {
+    title: "🔥 عرض اليوم: أول 5 مشترين يحصلوا على باقة إضافية!",
+    desc: "💣 توصية تداول + أدوات AI بسعر خاص اليوم فقط!",
+    profit: "💲 قيمة محتملة للفلوس: 50-100 جنيه"
+  },
+  {
+    title: "🔥 خصم رهيب على صور AI حصرية!",
+    desc: "🖼️ الباكيات والتصميمات بأسعار خيالية",
+    profit: "💲 وفر حتى 70 جنيه"
+  },
+  {
+    title: "🔥 تجربة مجانية لمستوى التفعيل الوحش!",
+    desc: "🎮 Boost + Configs احترافية لجميع الألعاب",
+    profit: "💲 جرب وفر فلوسك قبل الدفع"
+  }
+];
+
+// العداد التنازلي (انتهاء العرض)
+let countdownDate = new Date();
+countdownDate.setHours(countdownDate.getHours() + 12); // ينتهي بعد 12 ساعة
+
+// تحديث العرض
+function updateBanner() {
+  const offer = dailyOffers[Math.floor(Math.random() * dailyOffers.length)];
+  document.getElementById("banner-title").textContent = offer.title;
+  document.getElementById("banner-desc").textContent = offer.desc;
+  document.getElementById("banner-profit").textContent = offer.profit;
+  // مؤثر صوتي خفيف عند تغيير العرض
+  const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3');
+  audio.volume = 0.2;
+  audio.play();
+}
+updateBanner();
+setInterval(updateBanner, 20000); // تغيير العرض كل 20 ثانية
+
+// تحديث العداد التنازلي
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = countdownDate - now;
+
+  const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+  const seconds = Math.floor((distance % (1000*60))/1000);
+
+  document.getElementById("countdown").textContent = `⏳ ينتهي خلال ${hours}س ${minutes}د ${seconds}ث`;
+  
+  if(distance < 0){
+    document.getElementById("countdown").textContent = "⚡ انتهى العرض!";
+  }
+}
+setInterval(updateCountdown, 1000);
+</script>
   <h2>🔥 الخدمات المتاحة</h2>
   <div class="grid"><div class="card">
   <h3>🎮 Boost حسابك</h3>
